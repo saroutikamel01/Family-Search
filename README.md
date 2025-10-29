@@ -58,8 +58,7 @@ El Attaf, Algérie 🇩🇿
 ↓
 Savoie, France 🇫🇷
 
-yaml
-Copier le code
+
 
 Un parcours qui illustre la mobilité méditerranéenne du XIXᵉ et XXᵉ siècle.
 
@@ -81,13 +80,13 @@ visant à **préserver la mémoire** et **transmettre l’histoire** de la famil
 - **Frontend :** HTML5, CSS3, JavaScript  
 - **Backend :** Node.js / Django / Flask  
 - **Base de données :** MongoDB / PostgreSQL  
-- **Hébergement :** GitHub Pages ou Netlify  
+- **Hébergement :** GitHub Pages ou Netlify ou Vercel  
 
 ---
 
 ## 🌐 Accès
 
-> 🏡 [Site Web de la Famille GOMILA](#) *(lien à ajouter)*  
+> 🏡 [Site Web de la Famille GOMILA](#) *https://family-search.vercel.app/*  
 
 ---
 
