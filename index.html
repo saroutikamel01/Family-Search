@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GÉNÉALOGIE : Famille GOMILA - Des Baléares à la Savoie</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /*
+         * CSS - Styles pour un design moderne et thématique
+         */
+      :root {
+        --color-primary: #004a77; /* Bleu profond (Méditerranée) */
+        --color-secondary: #f0e6c5; /* Beige/Sable (Algérie) */
+        --color-accent: #d9534f; /* Rouge pour l'accentuation */
+        --color-text: #333;
+        --color-light: #fff;
+        --color-background: #f8f9fa;
+        --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-main);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-background);
+        color: var(--color-text);
+      }
+
+      header {
+        background-color: var(--color-primary);
+        color: var(--color-light);
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 74, 119, 0.9) 0%,
+          rgba(0, 74, 119, 0.7) 100%
+        );
+        z-index: 1;
+      }
+
+      header > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 2px;
+      }
+
+      header p {
+        font-style: italic;
+        font-size: 1.1em;
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 10px auto 0;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+      }
+
+      /* Onglets de Navigation */
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--color-secondary);
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        background-color: transparent;
+        border: none;
+        padding: 15px 20px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        color: var(--color-primary);
+        transition: background-color 0.3s, color 0.3s;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .tab-button:hover {
+        background-color: rgba(0, 74, 119, 0.05);
+      }
+
+      .tab-button.active {
+        color: var(--color-accent);
+      }
+
+      .tab-button.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-accent);
+      }
+
+      /* Contenu des Onglets */
+      .tab-content {
+        display: none;
+        padding: 20px;
+        background-color: var(--color-light);
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        /* Animation CSS */
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        animation: fadeIn 0.5s ease-in-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .tab-content.active {
+        display: block;
+        opacity: 1;
+      }
+
+      /* Style des Sections */
+      section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border-left: 5px solid var(--color-secondary);
+        background-color: var(--color-light);
+        border-radius: 0 8px 8px 0;
+      }
+
+      h2 {
+        color: var(--color-primary);
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      h3 {
+        color: var(--color-accent);
+        margin-top: 30px;
+      }
+
+      .person-card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .person-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .person-card strong {
+        color: var(--color-primary);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 0.9em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: var(--color-secondary);
+        color: var(--color-primary);
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .note {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 4px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        background-color: var(--color-primary);
+        color: var(--color-light);
+        font-size: 0.9em;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 40px auto;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        background-color: var(--color-secondary);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: var(--color-light);
+        border: 4px solid var(--color-accent);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .left {
+        left: 0;
+      }
+
+      .right {
+        left: 50%;
+      }
+
+      .left::after {
+        right: -10px;
+      }
+
+      .right::after {
+        left: -10px;
+      }
+
+      .timeline-content {
+        padding: 20px;
+        background-color: var(--color-light);
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .timeline-date {
+        font-weight: bold;
+        color: var(--color-accent);
+      }
+
+      /* Carte généalogique */
+      .family-tree {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .generation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .person-node {
+        background-color: var(--color-light);
+        border: 2px solid var(--color-secondary);
+        border-radius: 8px;
+        padding: 15px;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .person-node:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .person-name {
+        font-weight: bold;
+        color: var(--color-primary);
+        margin-bottom: 5px;
+      }
+
+      .person-dates {
+        font-size: 0.9em;
+        color: var(--color-text);
+        margin-bottom: 10px;
+      }
+
+      .person-location {
+        font-size: 0.8em;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2em;
+        }
+
+        .tabs {
+          flex-direction: column;
+        }
+
+        .tab-button {
+          width: 100%;
+          text-align: left;
+          padding: 12px 15px;
+        }
+
+        .timeline::after {
+          left: 31px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+
+        .timeline-item::after {
+          left: 21px;
+        }
+
+        .right {
+          left: 0;
+        }
+
+        .family-tree {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <i class="fas fa-route"></i> Arbre Généalogique de la Famille GOMILA
+      </h1>
+      <p>
+        Des Baléares à la Savoie, via l'Algérie : Récit d'un siècle d'histoire
+        et de résilience méditerranéenne.
+      </p>
+    </header>
+
+    <div class="container">
+      <div class="tabs">
+        <button class="tab-button active" data-tab="accueil">ACCUEIL</button>
+        <button class="tab-button" data-tab="g1">
+          GÉNÉRATION 1 & 2 : Les Pionniers (1836-1917)
+        </button>
+        <button class="tab-button" data-tab="g3">
+          GÉNÉRATION 3 : Marcel Michel (1904-1975)
+        </button>
+        <button class="tab-button" data-tab="g4">
+          GÉNÉRATION 4 : L'Héritage (1928-Présent)
+        </button>
+        <button class="tab-button" data-tab="sources">
+          SOURCES & CONTEXTE
+        </button>
+      </div>
+
+      <div id="accueil" class="tab-content active">
+        <h2>Bienvenue dans l'histoire de la Famille GOMILA</h2>
+
+        <section>
+          <h3>Présentation</h3>
+          <p>
+            Ce site retrace l'histoire de la famille GOMILA, de ses origines à
+            Minorque (Baléares, Espagne) à son établissement en Savoie (France),
+            en passant par l'Algérie. Découvrez l'itinéraire fascinant de cette
+            famille à travers les générations, les continents et les événements
+            historiques.
+          </p>
+
+          <div class="family-tree">
+            <div class="generation">
+              <div class="person-node">
+                <div class="person-name">Antoine GOMILA MASCARO</div>
+                <div class="person-dates">1836 - 1910</div>
+                <div class="person-location">Minorque → El Attaf</div>
+              </div>
+            </div>
+            <div class="generation">
+              <div class="person-node">
+                <div class="person-name">Antoine GOMILA FEBRER</div>
+                <div class="person-dates">1868 - 1928</div>
+                <div class="person-location">El Attaf</div>
+              </div>
+            </div>
+            <div class="generation">
+              <div class="person-node">
+                <div class="person-name">Marcel Michel GOMILA</div>
+                <div class="person-dates">1904 - 1975</div>
+                <div class="person-location">El Attaf → Chambéry</div>
+              </div>
+            </div>
+            <div class="generation">
+              <div class="person-node">
+                <div class="person-name">Yves Antoine GOMILA</div>
+                <div class="person-dates">1928 - 2017</div>
+                <div class="person-location">El Attaf → Albertville</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Chronologie des événements marquants</h3>
+          <div class="timeline">
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <div class="timeline-date">1836</div>
+                <p>
+                  Naissance d'Antoine GOMILA MASCARO à Es Migjorn Gran, Minorque
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <div class="timeline-date">1868</div>
+                <p>Naissance d'Antoine GOMILA FEBRER à Es Mercadal, Minorque</p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <div class="timeline-date">1904</div>
+                <p>Naissance de Marcel Michel GOMILA à El Attaf, Algérie</p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <div class="timeline-date">1928</div>
+                <p>Naissance d'Yves Antoine GOMILA à Miliana, Algérie</p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <div class="timeline-date">1962</div>
+                <p>Rapatriement de la famille en France</p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <div class="timeline-date">2017</div>
+                <p>Décès d'Yves Antoine GOMILA à Albertville, Savoie</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="g1" class="tab-content">
+        <h2>GÉNÉRATIONS 1 & 2 : Les Pionniers (Minorque à El Attaf)</h2>
+        <section>
+          <h3>Ascendance Directe d'Antoine GOMILA FEBRER</h3>
+          <div class="person-card">
+            <p><strong>Antoine François GOMILA MASCARO (Père)</strong></p>
+            <ul>
+              <li>
+                **Naissance :** 15 novembre 1836 (Es Migjorn Gran, Minorque,
+                Espagne)
+              </li>
+              <li>**Décès :** 16 septembre 1910 (El Attaf, Algérie)</li>
+              <li>
+                **Mariage :** 12 octobre 1853 (Ferreries, Minorque) avec
+                Francisca FEBRER LLORENS
+              </li>
+            </ul>
+          </div>
+          <div class="person-card">
+            <p><strong>Francisca FEBRER LLORENS (Mère)</strong></p>
+            <ul>
+              <li>**Naissance :** Vers 1836 (Ferreries, Minorque, Espagne)</li>
+              <li>**Décès :** 9 mai 1895 (El Attaf, Algérie)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Antoine GOMILA FEBRER (1868-1928)</h3>
+          <div class="person-card">
+            <ul>
+              <li>
+                **Naissance :** 6 février 1868 à Es Mercadal, Minorque, Espagne.
+              </li>
+              <li>**Décès :** 21 janvier 1928 à El Attaf, Algérie.</li>
+              <li>
+                **Contexte :** Fondateur de la branche algérienne des Gomila à
+                El Attaf.
+              </li>
+            </ul>
+            <h4>Les Deux Unions</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Conjoint(e)</th>
+                  <th>Mariage</th>
+                  <th>Enfants (Demi-Frères & Sœurs de Marcel)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>**1.** Marie Nathalie BOUSCARY (1871-1901)</td>
+                  <td>9 nov. 1889 (El Attaf)</td>
+                  <td>
+                    Antoine (1890-1912), Henriette (1893-1912), **Françoise
+                    (1896-???)**, Juliette (1898-1921).
+                  </td>
+                </tr>
+                <tr>
+                  <td>**2.** Marie Jeanne AMELLER CAMPS (1883-1954)</td>
+                  <td>7 juin 1902 (El Attaf)</td>
+                  <td>Marcel Michel (1904) et 4 autres enfants.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <h3>Ascendance de Marie Jeanne AMELLER CAMPS</h3>
+          <div class="person-card">
+            <p>
+              <strong>Miguel Sebastien Mangin AMELLER RIUDAVETS (Père)</strong>
+            </p>
+            <ul>
+              <li>
+                **Naissance :** 12 décembre 1841 (Alaior, Minorque, Espagne)
+              </li>
+              <li>**Décès :** 2 décembre 1917 (El Attaf, Algérie)</li>
+            </ul>
+          </div>
+          <div class="person-card">
+            <p><strong>Martine CAMPS GARRIGA (Mère)</strong></p>
+            <ul>
+              <li>**Naissance :** 5 mars 1853 (Dely Ibrahim, Algérie)</li>
+              <li>
+                **Décès Confirmé :** **31 janvier 1916** (El Attaf, Algérie)
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div id="g3" class="tab-content">
+        <h2>GÉNÉRATION 3 : Marcel Michel GOMILA (1904-1975)</h2>
+        <section>
+          <h3>Profil de Marcel Michel GOMILA</h3>
+          <div class="person-card">
+            <ul>
+              <li>**Naissance :** 8 décembre 1904 à El Attaf, Algérie.</li>
+              <li>**Décès :** 18 mai 1975 à Chambéry, Savoie, France.</li>
+              <li>
+                **Conjointe :** Lucie Marie Jeanne PASSERON (1907-2006). Mariage
+                : 1er octobre 1927 à El Attaf.
+              </li>
+              <li>
+                **Parents de Lucie :** Albin Jean Louis PASSERON et Joséphine
+                Marie Jeanne NAAB.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Activité et Patrimoine à El Attaf</h3>
+          <div class="note">
+            <strong>Contexte :</strong> Marcel GOMILA a dirigé l'entreprise
+            familiale jusqu'au rapatriement en 1962.
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Activité</th>
+                <th>Détails</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>**Profession**</td>
+                <td>
+                  Propriétaire du **"Commerce de Grains Gomila"** (1928-1962).
+                  Spécialité : Culture céréalière et oléicole.
+                </td>
+              </tr>
+              <tr>
+                <td>**Patrimoine**</td>
+                <td>
+                  Exploitation de **45 hectares** de terres agricoles. Domaine
+                  **"Les Oliviers"** (Acte n°2847 - 1923).
+                </td>
+              </tr>
+              <tr>
+                <td>**Reconnaissance**</td>
+                <td>
+                  Médaille du Travail (1970). Président d'honneur des Anciens
+                  d'El Attaf.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h3>Fratrie de Marcel Michel GOMILA (Nés du 2e mariage)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nom et Dates</th>
+                <th>Conjoint(e) (Nom Confirmé)</th>
+                <th>Lieux de Vie (France)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Marguerite Noelline (1906 - v. 1982)</td>
+                <td>Henri Marceau AUDIBERT</td>
+                <td>Annecy (Haute-Savoie)</td>
+              </tr>
+              <tr>
+                <td>Jeanne Georgette "Jeannette" (1908 - 1969)</td>
+                <td>Anselme Gabriel VERDERA</td>
+                <td>Montpellier (Hérault)</td>
+              </tr>
+              <tr>
+                <td>**Solange Henriette** (1913 - 1991)</td>
+                <td>**Jean Baptiste LORENTE** (Mariage 1931, El Attaf)</td>
+                <td>Pau (Pyrénées-Atlantiques)</td>
+              </tr>
+              <tr>
+                <td>**Fernande Eliane "Liliane"** (1920 - 1994)</td>
+                <td>**Jean-Marie DEBOVE**</td>
+                <td>Saran (Loiret)</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div id="g4" class="tab-content">
+        <h2>GÉNÉRATION 4 : Les Enfants (La Savoie)</h2>
+        <section>
+          <h3>Yves Antoine GOMILA (1928-2017)</h3>
+          <div class="person-card">
+            <ul>
+              <li>
+                **Naissance :** 21 juillet 1928 (Miliana, Algérie). **Décès :**
+                9 juin 2017 (Albertville, Savoie).
+              </li>
+              <li>
+                **Conjointe :** Odile Germaine Marie DAGRON (1935-2024). Mariage
+                : **14 novembre 1959**.
+              </li>
+              <li>
+                **Descendance :** Maryvonne Eliane, Josette Beatrice Marie,
+                Thierry, Jean-Marie.
+              </li>
+            </ul>
+            <h4>Parcours Professionnel et Militaire</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Période</th>
+                  <th>Activité / Fonction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1942 - 1962</td>
+                  <td>Artisan **Maréchal-ferrand** à El Attaf.</td>
+                </tr>
+                <tr>
+                  <td>1956 - 1958</td>
+                  <td>
+                    **Interprète arabe–français** (Guerre d'Algérie, 5ème BCA).
+                    Cité à l'ordre du régiment.
+                  </td>
+                </tr>
+                <tr>
+                  <td>1963 - 1988</td>
+                  <td>
+                    Artisan construction de **Charpentes métalliques et
+                    Ferronnerie d'art** (Montmélian, Savoie).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <h3>Fratrie d'Yves Antoine GOMILA</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nom et Dates</th>
+                <th>Conjoint(e) (Nom Confirmé)</th>
+                <th>Détails Clés</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gérard Marcel (v. 1930 - **2013**)</td>
+                <td>Marianne LOLO (Mariage v. 1967)</td>
+                <td>Décédé à Montmélian (Savoie). Aucun enfant.</td>
+              </tr>
+              <tr>
+                <td>Christiane (Née **25 juillet 1933**)</td>
+                <td>Gilbert SOLBES (1920-1981)</td>
+                <td>
+                  Mariage v. 1953 (Algérie). 2 enfants (Maryse, Noelle SOLBES).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div id="sources" class="tab-content">
+        <h2>SOURCES & CONTEXTE : La Preuve de l'Histoire</h2>
+
+        <section>
+          <h3>Documents d'Archives Clés</h3>
+          <div class="note">
+            Ces documents constituent la fondation de cette généalogie et
+            peuvent être consultés pour des recherches plus approfondies.
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Localisation</th>
+                <th>Détails Révélés</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Registres d'état civil</td>
+                <td>El Attaf, Miliana (ANOM), Es Mercadal (Espagne)</td>
+                <td>
+                  Confirmation de toutes les dates de naissance et de mariage.
+                </td>
+              </tr>
+              <tr>
+                <td>Dossier de rapatrié n°8472</td>
+                <td>Ministère des Anciens Combattants (ONACVG)</td>
+                <td>
+                  Preuve de l'exode, liste des ayants droit, projet
+                  d'installation en France.
+                </td>
+              </tr>
+              <tr>
+                <td>Acte de propriété n°2847</td>
+                <td>Tribunal de Miliana, Cadastre d'El Attaf</td>
+                <td>Détails du domaine **"Les Oliviers"** (45 ha).</td>
+              </tr>
+              <tr>
+                <td>Album photographique famille GOMILA</td>
+                <td>Archives ANOM (Réf: 15Fi/284)</td>
+                <td>Iconographie familiale et contextuelle à El Attaf.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h3>Lieux de Vie et Associations</h3>
+          <p>
+            La famille a maintenu des liens forts avec la communauté minorquine
+            d'Afrique du Nord et les rapatriés, notamment à travers :
+          </p>
+          <ul>
+            <li>
+              **Amicale des Minorquins d'Afrique du Nord** (Membre fondateur
+              Marcel GOMILA, 1950).
+            </li>
+            <li>**ANFANOMA** (Adhésion 1964).</li>
+            <li>
+              **Lieux en Algérie :** El Attaf (Rue de la Gare), Miliana
+              (Commerce rue du Marché).
+            </li>
+            <li>
+              **Lieux en France (Savoie) :** Chambéry (Domicile), Montmélian
+              (Atelier d'Yves), Albertville (Résidence d'Yves).
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2025 Généalogie Famille GOMILA. Toutes les informations sont
+        issues de recherches archivées et confirmées.
+      </p>
+    </footer>
+
+    <script>
+      /*
+       * JAVASCRIPT - Gestion des Onglets et Animation
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabs = document.querySelectorAll(".tab-button");
+        const contents = document.querySelectorAll(".tab-content");
+
+        // Fonction pour changer d'onglet
+        function switchTab(targetId) {
+          // 1. Désactiver tous les onglets et contenus
+          tabs.forEach((t) => t.classList.remove("active"));
+          contents.forEach((c) => {
+            c.classList.remove("active");
+          });
+
+          // 2. Activer l'onglet cliqué
+          const activeTab = document.querySelector(`[data-tab="${targetId}"]`);
+          if (activeTab) {
+            activeTab.classList.add("active");
+          }
+
+          // 3. Afficher le contenu ciblé
+          const targetContent = document.getElementById(targetId);
+          if (targetContent) {
+            targetContent.classList.add("active");
+          }
+        }
+
+        // Ajouter les écouteurs d'événements aux onglets
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const targetId = tab.getAttribute("data-tab");
+            switchTab(targetId);
+          });
+        });
+
+        // Gestion de l'URL pour permettre le partage d'onglets spécifiques
+        function handleURLHash() {
+          const hash = window.location.hash.substring(1);
+          if (hash && document.getElementById(hash)) {
+            switchTab(hash);
+          } else {
+            // Onglet par défaut
+            switchTab("accueil");
+          }
+        }
+
+        // Écouter les changements d'URL
+        window.addEventListener("hashchange", handleURLHash);
+
+        // Initialiser l'état de l'onglet au chargement
+        handleURLHash();
+      });
+    </script>
+  </body>
+</html>
